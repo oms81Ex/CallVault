@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CallVault_Documentation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="callvault-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%AC%B8%EC%84%9C">CallVault 프로젝트 문서</h1>
+<h2 id="1-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94">1. 프로젝트 개요</h2>
+<h3 id="11-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%86%8C%EA%B0%9C">1.1 프로젝트 소개</h3>
+<p>CallVault는 안드로이드 기반의 자동 전화 녹음 및 관리 애플리케이션입니다. 통화를 자동으로 녹음하고, 녹음 파일을 효율적으로 관리하여 사용자에게 직관적인 통화 녹음 경험을 제공합니다.</p>
+<h3 id="12-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5">1.2 주요 기능</h3>
+<ul>
+<li>자동 통화 녹음</li>
+<li>녹음 파일 관리 및 재생</li>
+<li>다양한 설정 옵션(저장 위치, 파일명 형식, 품질 등)</li>
+<li>자동 삭제(기간/용량 기준)</li>
+<li>저장 공간 부족 알림</li>
+</ul>
+<h2 id="2-%EA%B8%B0%EB%8A%A5-%EB%AA%85%EC%84%B8%EC%84%9C">2. 기능 명세서</h2>
+<h3 id="21-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%9A%94%EC%95%BD">2.1 주요 기능 요약</h3>
+<table>
+<thead>
+<tr>
+<th>기능 분류</th>
+<th>상세 기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>통화 감지</td>
+<td>수신/발신 통화 상태 감지, 번호 식별</td>
+</tr>
+<tr>
+<td>녹음 관리</td>
+<td>통화 녹음, 녹음 저장, 메타데이터 관리</td>
+</tr>
+<tr>
+<td>설정 관리</td>
+<td>저장 위치, 파일명 형식, 품질, 자동 삭제 설정</td>
+</tr>
+<tr>
+<td>저장 공간</td>
+<td>저장 공간 확인, 부족 시 알림</td>
+</tr>
+<tr>
+<td>자동 삭제</td>
+<td>일자/용량 기준 자동 삭제</td>
+</tr>
+<tr>
+<td>파일 관리</td>
+<td>녹음 목록, 재생, 공유, 삭제</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-%EC%83%81%EC%84%B8-%EA%B8%B0%EB%8A%A5-%EB%AA%85%EC%84%B8">2.2 상세 기능 명세</h3>
+<h4 id="221-%ED%86%B5%ED%99%94-%EA%B0%90%EC%A7%80-%EB%B0%8F-%EB%85%B9%EC%9D%8C">2.2.1 통화 감지 및 녹음</h4>
+<ul>
+<li><strong>통화 상태 감지</strong>: TelephonyManager를 통한 통화 상태 변화 감지</li>
+<li><strong>녹음 시작/종료</strong>: 통화 시작/종료 시 자동 녹음 처리</li>
+<li><strong>녹음 파일 저장</strong>: 설정에 따른 저장 위치 및 파일명 형식 적용</li>
+</ul>
+<h4 id="222-%EC%84%A4%EC%A0%95-%EA%B4%80%EB%A6%AC">2.2.2 설정 관리</h4>
+<ul>
+<li><strong>저장 위치</strong>: 내부/외부 저장소 선택</li>
+<li><strong>파일명 형식</strong>: 사용자 정의 파일명 패턴 지원</li>
+<li><strong>녹음 품질</strong>: 기본/고음질 등 선택</li>
+<li><strong>자동 녹음</strong>: 활성화/비활성화</li>
+<li><strong>알림 표시</strong>: 녹음 중/완료 알림 활성화/비활성화</li>
+<li><strong>자동 삭제</strong>: 일수 및 최대 용량 설정</li>
+</ul>
+<h4 id="223-%EC%9E%90%EB%8F%99-%EC%82%AD%EC%A0%9C">2.2.3 자동 삭제</h4>
+<ul>
+<li><strong>기간 기준</strong>: 설정된 일수(기본 30일)보다 오래된 파일 자동 삭제</li>
+<li><strong>용량 기준</strong>: 전체 녹음 파일이 설정된 최대 용량(기본 1GB)을 초과할 경우 오래된 파일부터 삭제</li>
+</ul>
+<h4 id="224-%EB%A9%94%ED%83%80%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B4%80%EB%A6%AC">2.2.4 메타데이터 관리</h4>
+<ul>
+<li><strong>파일 정보 추출</strong>: 파일명에서 통화 유형, 전화번호, 날짜, 시간 등 추출</li>
+<li><strong>녹음 목록 관리</strong>: 녹음 파일 목록 표시, 정렬, 필터링</li>
+</ul>
+<h4 id="225-ui-%EA%B8%B0%EB%8A%A5">2.2.5 UI 기능</h4>
+<ul>
+<li><strong>녹음 목록</strong>: 모든 녹음 파일 목록 표시</li>
+<li><strong>상세 화면</strong>: 녹음 파일 상세 정보 및 재생 기능</li>
+<li><strong>설정 화면</strong>: 모든 설정 옵션 제어</li>
+<li><strong>녹음 활성화/비활성화</strong>: 앱 메인 화면에서 바로 제어</li>
+</ul>
+<h2 id="3-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98">3. 시스템 아키텍처</h2>
+<h3 id="31-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B0%9C%EC%9A%94">3.1 아키텍처 개요</h3>
+<p>CallVault는 MVVM(Model-View-ViewModel) 아키텍처 패턴을 기반으로 구현되었으며, 다음과 같은 레이어로 구성됩니다:</p>
+<ul>
+<li><strong>UI 레이어</strong>: Jetpack Compose 기반의 사용자 인터페이스</li>
+<li><strong>ViewModel 레이어</strong>: UI와 데이터 소스 간의 중재자</li>
+<li><strong>Repository 레이어</strong>: 데이터 액세스 및 비즈니스 로직</li>
+<li><strong>Service 레이어</strong>: 백그라운드 서비스 및 시스템 이벤트 처리</li>
+<li><strong>Settings 레이어</strong>: 앱 설정 관리</li>
+</ul>
+<h3 id="32-%EC%A3%BC%EC%9A%94-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8">3.2 주요 컴포넌트</h3>
+<pre class="hljs"><code><div>com.dev_oms.callvault/
+├── MainActivity.kt               # 앱 진입점 및 메인 UI
+├── MainViewModel.kt              # 메인 화면 뷰모델
+├── Recording.kt                  # 녹음 파일 모델
+├── RecordingRepository.kt        # 녹음 파일 관리 저장소
+├── CallRecordService.kt          # 통화 감지 및 녹음 서비스
+├── SettingsManager.kt            # 앱 설정 관리
+└── ui/                           # UI 컴포넌트
+    ├── SettingsScreen.kt         # 설정 화면
+    └── DetailScreen.kt           # 녹음 상세 화면
+</div></code></pre>
+<h2 id="4-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8-uml">4. 클래스 다이어그램 (UML)</h2>
+<pre class="hljs"><code><div>+-------------------------+      +-------------------------+
+|    MainActivity         |      |    MainViewModel        |
++-------------------------+      +-------------------------+
+| - mainViewModel         |&lt;----&gt;| - repository            |
+| + onCreate()            |      | - isRecordingEnabled    |
++-------------------------+      | - recordings            |
+                                 | + toggleRecording()     |
+                                 | + loadRecordings()      |
+                                 | + deleteRecording()     |
+                                 | + shareRecording()      |
+                                 +-------------------------+
+                                          ^
+                                          |
++-------------------------+      +-------------------------+
+|    SettingsManager      |      |   RecordingRepository   |
++-------------------------+      +-------------------------+
+| - prefs                 |      | - context               |
+| + saveLocation          |      | + getAllRecordings()    |
+| + fileNaming            |      | + deleteRecording()     |
+| + quality               |      | + shareRecording()      |
+| + autoDeleteDays        |      | + autoDeleteOldRecordings() |
+| + autoDeleteSizeMb      |      +-------------------------+
+| + autoRecord            |                ^
+| + showNotification      |                |
++-------------------------+      +-------------------------+
+        ^                        |      Recording          |
+        |                        +-------------------------+
++-------------------------+      | - fileName              |
+|   CallRecordService     |      | - filePath              |
++-------------------------+      | - date                  |
+| - recorder              |      | - duration              |
+| - isRecording           |      | - callType              |
+| - callReceiver          |      | - phoneNumber           |
+| + startRecording()      |      +-------------------------+
+| + stopRecording()       |
+| + showNotification()    |
++-------------------------+
+</div></code></pre>
+<h2 id="5-%EC%8B%9C%ED%80%80%EC%8A%A4-%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8">5. 시퀀스 다이어그램</h2>
+<h3 id="51-%ED%86%B5%ED%99%94-%EB%85%B9%EC%9D%8C-%EC%8B%9C%ED%80%80%EC%8A%A4">5.1 통화 녹음 시퀀스</h3>
+<pre class="hljs"><code><div>User       System      CallReceiver  CallRecordService  SettingsManager  RecordingRepository
+ |            |             |              |                  |                 |
+ |  전화 수신/발신  |             |              |                  |                 |
+ |&lt;------------|             |              |                  |                 |
+ |            |  통화 상태 변경  |              |                  |                 |
+ |            |------------&gt;|              |                  |                 |
+ |            |             | onReceive()  |                  |                 |
+ |            |             |-------------&gt;|                  |                 |
+ |            |             |              | startRecording() |                  |                 |
+ |            |             |              |-----------------&gt;|                 |
+ |            |             |              | 설정값 가져오기     |                  |                 |
+ |            |             |              |-----------------&gt;|                 |
+ |            |             |              |&lt;-----------------|                 |
+ |            |             |              | 저장 공간 확인     |                  |                 |
+ |            |             |              |-----------------------------------&gt;|
+ |            |             |              |&lt;-----------------------------------|
+ |            |             |              | 녹음 시작         |                  |                 |
+ |            |             |              |--------|         |                 |
+ |            |             |              |        |         |                 |
+ |            |  통화 종료     |              |        |         |                 |
+ |            |------------&gt;|              |        |         |                 |
+ |            |             | onReceive()  |        |         |                 |
+ |            |             |-------------&gt;|        |         |                 |
+ |            |             |              | stopRecording()  |                 |
+ |            |             |              |--------|         |                 |
+ |            |             |              | 녹음 파일 저장     |                  |                 |
+ |            |             |              |-----------------------------------&gt;|
+ |            |             |              |&lt;-----------------------------------|
+</div></code></pre>
+<h3 id="52-%EC%9E%90%EB%8F%99-%EC%82%AD%EC%A0%9C-%EC%8B%9C%ED%80%80%EC%8A%A4">5.2 자동 삭제 시퀀스</h3>
+<pre class="hljs"><code><div>MainViewModel  RecordingRepository  SettingsManager  FileSystem
+      |                |                  |                |
+      | loadRecordings |                  |                |
+      |---------------&gt;|                  |                |
+      |                | autoDeleteOldRecordings          |                |
+      |                |-----------------&gt;|                |
+      |                | 설정값 가져오기     |                |
+      |                |&lt;-----------------|                |
+      |                | 파일 목록 요청     |                |
+      |                |----------------------------------&gt;|
+      |                |&lt;----------------------------------|
+      |                | 오래된 파일 확인   |                |
+      |                |----------------------------------&gt;|
+      |                | 삭제 대상 파일     |                |
+      |                |----------------------------------&gt;|
+      |                |&lt;----------------------------------|
+      |                | 용량 초과 파일 확인|                |
+      |                |----------------------------------&gt;|
+      |                | 삭제 대상 파일     |                |
+      |                |----------------------------------&gt;|
+      |                |&lt;----------------------------------|
+      |                | 녹음 목록 반환     |                |
+      |&lt;---------------|                  |                |
+</div></code></pre>
+<h3 id="53-%EC%84%A4%EC%A0%95-%EB%B3%80%EA%B2%BD-%EC%8B%9C%ED%80%80%EC%8A%A4">5.3 설정 변경 시퀀스</h3>
+<pre class="hljs"><code><div>User     SettingsScreen    SettingsManager    CallRecordService
+  |            |                  |                  |
+  | 설정 화면 열기 |                  |                  |
+  |-----------&gt;|                  |                  |
+  |            | 설정값 가져오기     |                  |
+  |            |-----------------&gt;|                  |
+  |            |&lt;-----------------|                  |
+  |            | 설정값 표시        |                  |
+  |            |--------|         |                  |
+  | 설정값 변경    |        |         |                  |
+  |-----------&gt;|        |         |                  |
+  |            | 설정값 저장        |                  |
+  |            |-----------------&gt;|                  |
+  |            |&lt;-----------------|                  |
+  |            |                  | 변경된 설정 적용    |
+  |            |                  |&lt;-----------------|
+</div></code></pre>
+<h2 id="6-%EC%82%AC%EC%9A%A9%EB%90%9C-%EA%B8%B0%EC%88%A0-%EB%B0%8F-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC">6. 사용된 기술 및 라이브러리</h2>
+<h3 id="61-%ED%95%B5%EC%8B%AC-%EA%B8%B0%EC%88%A0">6.1 핵심 기술</h3>
+<ul>
+<li><strong>Kotlin</strong>: 주 프로그래밍 언어</li>
+<li><strong>Jetpack Compose</strong>: 최신 UI 프레임워크</li>
+<li><strong>MVVM 아키텍처</strong>: 모델-뷰-뷰모델 패턴</li>
+<li><strong>Coroutines</strong>: 비동기 처리</li>
+<li><strong>StateFlow</strong>: 반응형 프로그래밍</li>
+<li><strong>SharedPreferences</strong>: 설정 저장</li>
+</ul>
+<h3 id="62-%EC%A3%BC%EC%9A%94-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC">6.2 주요 라이브러리</h3>
+<ul>
+<li><strong>AndroidX</strong>: Android 확장 라이브러리</li>
+<li><strong>Material Design 3</strong>: 최신 UI 디자인 가이드라인</li>
+<li><strong>MediaRecorder</strong>: 오디오 녹음</li>
+<li><strong>MediaPlayer</strong>: 오디오 재생</li>
+<li><strong>JUnit &amp; AndroidX Test</strong>: 테스트 프레임워크</li>
+</ul>
+<h2 id="7-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A0%84%EB%9E%B5">7. 테스트 전략</h2>
+<h3 id="71-%EB%8B%A8%EC%9C%84-%ED%85%8C%EC%8A%A4%ED%8A%B8">7.1 단위 테스트</h3>
+<ul>
+<li><strong>SettingsManagerTest</strong>: 설정 저장/불러오기 검증</li>
+<li><strong>RecordingRepositoryTest</strong>: 자동 삭제 로직 검증</li>
+</ul>
+<h3 id="72-%ED%86%B5%ED%95%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8">7.2 통합 테스트</h3>
+<ul>
+<li><strong>CallRecordServiceTest</strong>: 녹음 시작/종료 시나리오</li>
+<li><strong>MainViewModelTest</strong>: 데이터 로드 및 관리 시나리오</li>
+</ul>
+<h3 id="73-ui-%ED%85%8C%EC%8A%A4%ED%8A%B8">7.3 UI 테스트</h3>
+<ul>
+<li><strong>SettingsScreen UI 테스트</strong>: 설정 변경 및 저장</li>
+<li><strong>RecordingList UI 테스트</strong>: 녹음 목록 표시 및 제어</li>
+</ul>
+<h2 id="8-%EB%B0%B0%ED%8F%AC-%EB%B0%8F-%EC%84%A4%EC%B9%98-%EC%95%88%EB%82%B4">8. 배포 및 설치 안내</h2>
+<h3 id="81-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD">8.1 시스템 요구사항</h3>
+<ul>
+<li>Android 8.0 (API 레벨 26) 이상</li>
+<li>필수 권한: RECORD_AUDIO, READ_PHONE_STATE, WRITE_EXTERNAL_STORAGE</li>
+<li>최소 저장 공간: 100MB</li>
+</ul>
+<h3 id="82-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95">8.2 설치 방법</h3>
+<ol>
+<li>APK 파일 다운로드</li>
+<li>Android 기기에서 설치</li>
+<li>초기 실행 시 필요 권한 허용</li>
+<li>설정을 통해 녹음 기능 활성화</li>
+</ol>
+<hr>
+
+</body>
+</html>
